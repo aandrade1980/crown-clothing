@@ -1,18 +1,23 @@
 import React from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
+import { ISection } from "../../models/section";
 
 import "./menu-item.scss";
 
-interface IMenuItemProps {
-  id: number;
-  title: string;
-  imageUrl: string;
-  size?: string;
-}
-
-export const MenuItem = (props: IMenuItemProps) => {
-  const { title, imageUrl, size } = props;
+const MenuItem: React.FC<ISection & RouteComponentProps> = ({
+  title,
+  imageUrl,
+  size,
+  history,
+  linkUrl,
+  match
+}) => {
   return (
-    <div className={`${size ? size : ""} menu-item`}>
+    <div
+      className={`${size ? size : ""} menu-item`}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
@@ -24,3 +29,5 @@ export const MenuItem = (props: IMenuItemProps) => {
     </div>
   );
 };
+
+export default withRouter(MenuItem);

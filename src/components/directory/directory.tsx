@@ -1,7 +1,9 @@
 import React from "react";
 
 // Components
-import { MenuItem } from "../menu-item";
+import MenuItem from "../menu-item";
+
+import { ISection } from "../../models/section";
 
 import "./directory.scss";
 
@@ -9,14 +11,6 @@ interface IProps {}
 
 interface IState {
   sections: ISection[];
-}
-
-interface ISection {
-  title: string;
-  imageUrl: string;
-  id: number;
-  linkUrl: string;
-  size?: string;
 }
 
 export default class Directory extends React.Component<IProps, IState> {
@@ -64,14 +58,8 @@ export default class Directory extends React.Component<IProps, IState> {
   render() {
     return (
       <div className="directory-menu">
-        {this.state.sections.map(({ id, title, imageUrl, size }) => (
-          <MenuItem
-            key={id}
-            id={id}
-            title={title}
-            imageUrl={imageUrl}
-            size={size}
-          />
+        {this.state.sections.map(({ id, ...otherSectionProps }) => (
+          <MenuItem key={id} id={id} {...otherSectionProps} />
         ))}
       </div>
     );
