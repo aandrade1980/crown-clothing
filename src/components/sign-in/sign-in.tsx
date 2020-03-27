@@ -1,0 +1,74 @@
+import React, { Component } from "react";
+
+// Components
+import { FormInput } from "../form-input";
+import { CustomButton } from "../custom-button";
+
+import { IUSer } from "../../models/user";
+
+import "./sign-in.scss";
+
+interface IProps {}
+
+interface IState {
+  user: IUSer;
+}
+
+export default class SignIn extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      user: {
+        email: "",
+        password: ""
+      }
+    };
+  }
+
+  handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value, name } = e.currentTarget;
+
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        [name]: value
+      }
+    }));
+  };
+
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    this.setState({ user: { email: "", password: "" } });
+  };
+
+  render() {
+    return (
+      <div className="sign-in">
+        <h2>I already hace an account</h2>
+        <span>Sign in with your email and password</span>
+
+        <form onSubmit={this.handleSubmit}>
+          <FormInput
+            name="email"
+            type="email"
+            value={this.state.user.email}
+            onChange={this.handleChange}
+            label="Email"
+            required
+          />
+          <FormInput
+            name="password"
+            type="password"
+            value={this.state.user.password}
+            onChange={this.handleChange}
+            label="Password"
+            required
+          />
+          <CustomButton type="submit">Sign in</CustomButton>
+        </form>
+      </div>
+    );
+  }
+}
