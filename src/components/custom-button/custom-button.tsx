@@ -4,11 +4,20 @@ import "./custom-button.scss";
 
 interface ICustomButton {
   children: React.ReactNode;
-  type: "button" | "submit" | "reset" | undefined;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset" | undefined;
+  isGoogleSignIn?: boolean;
 }
 
-export const CustomButton = ({ children, ...otherProps }: ICustomButton) => (
-  <button className="custom-button" {...otherProps}>
+export const CustomButton = ({
+  children,
+  isGoogleSignIn,
+  ...otherProps
+}: ICustomButton) => (
+  <button
+    className={`custom-button ${isGoogleSignIn && "google-sign-in"}`}
+    {...otherProps}
+  >
     {children}
   </button>
 );

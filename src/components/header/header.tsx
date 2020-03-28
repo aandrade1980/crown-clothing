@@ -5,7 +5,12 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import "./header.scss";
 
-export const Header = () => {
+interface IHeaderProps {
+  currentUser: firebase.User | null;
+  signOut: () => void;
+}
+
+export const Header = ({ currentUser, signOut }: IHeaderProps) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -18,6 +23,13 @@ export const Header = () => {
         <Link to="/shop" className="option">
           CONTACT
         </Link>
+        {currentUser ? (
+          <div className="option" onClick={signOut}>
+            SIGN OUT
+          </div>
+        ) : (
+          <Link to="/signin">SIGN IN</Link>
+        )}
       </div>
     </div>
   );
