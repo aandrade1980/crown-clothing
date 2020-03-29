@@ -9,48 +9,38 @@ import Shop from "./pages/shop";
 import { Header } from "./components/header";
 import { SignInSignOutPage } from "./pages/sign-in-sign-out";
 
-import { auth } from "./firebase/firebase.utils";
+// Firebase
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
-interface IProps {}
+function App() {
+  const [currentUser, setCurrentUser] = React.useState<Partial<
+    firebase.User
+  > | null>(null);
 
-interface IState {
-  currentUser: firebase.User | null;
-}
+  React.useEffect(() => {
+    auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth, {});
 
-class App extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
+        userRef?.onSnapshot(snapShot => {
+          setCurrentUser({ ...snapShot.data() });
+        });
+      } else setCurrentUser(null);
+    });
+  }, []);
 
-    this.state = {
-      currentUser: null
-    };
-  }
+  const handleSignOut = () => auth.signOut();
 
-  handleSignOut = () => auth.signOut();
-
-  componentDidMount() {
-    auth.onAuthStateChanged(user => this.setState({ currentUser: user }));
-  }
-
-  componentWillMount() {
-    this.handleSignOut();
-  }
-
-  render() {
-    return (
-      <div>
-        <Header
-          currentUser={this.state.currentUser}
-          signOut={this.handleSignOut}
-        />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={Shop} />
-          <Route path="/signin" component={SignInSignOutPage} />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header currentUser={currentUser} signOut={handleSignOut} />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={Shop} />
+        <Route path="/signin" component={SignInSignOutPage} />
+      </Switch>
+    </div>
+  );
 }
 
 export default App;
