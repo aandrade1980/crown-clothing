@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { FormInput } from "../form-input";
 import { CustomButton } from "../custom-button";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 import { IUSer } from "../../models/user";
 
@@ -39,10 +39,17 @@ export default class SignIn extends Component<IProps, IState> {
     }));
   };
 
-  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    this.setState({ user: { email: "", password: "" } });
+    const { email, password } = this.state.user;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ user: { email: "", password: "" } });
+    } catch (error) {
+      console.error("Handle Submit sign in error: ", error);
+    }
   };
 
   render() {
