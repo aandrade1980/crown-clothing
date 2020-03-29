@@ -6,7 +6,7 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.scss";
 
 interface IHeaderProps {
-  currentUser: firebase.User | null;
+  currentUser: Partial<firebase.User> | null;
   signOut: () => void;
 }
 
