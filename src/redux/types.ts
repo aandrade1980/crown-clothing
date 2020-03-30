@@ -1,7 +1,7 @@
 export interface IRootState {
-  user: IUser;
+  user: ICurrentUser;
 }
 
-interface IUser {
-  currentUser: firebase.User;
+interface ICurrentUser {
+  currentUser: firebase.User | null;
 }
