@@ -1,1 +1,3 @@
-export { CollectionItem } from "./collection-item";
+import CollectionItem from "./collection-item";
+
+export { CollectionItem };

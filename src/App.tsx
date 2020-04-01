@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // Redux
+import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
 
@@ -62,7 +63,7 @@ const mapStateToProps = ({ user: { currentUser } }: IRootState) => ({
   currentUser
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCurrentUser: (user: firebase.User | null) => dispatch(setCurrentUser(user))
 });
 

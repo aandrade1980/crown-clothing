@@ -16,7 +16,7 @@ export const createUserProfileDocument = async (
   userAuth: firebase.User | null,
   additionalData: {}
 ) => {
-  if (!userAuth) return;
+  if (!userAuth) return null;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 

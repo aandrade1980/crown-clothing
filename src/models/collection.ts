@@ -10,4 +10,5 @@ export interface IItem extends IBase {
   name: string;
   imageUrl: string;
   price: number;
+  quantity?: number;
 }
