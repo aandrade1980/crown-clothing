@@ -1,3 +1,5 @@
+import { IItem } from "../models/collection";
+
 export interface IRootState {
   user: ICurrentUser;
   cart: ICart;
@@ -9,4 +11,5 @@ interface ICurrentUser {
 
 interface ICart {
   hidden: boolean;
+  cartItems: IItem[];
 }
