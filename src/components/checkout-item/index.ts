@@ -1,1 +1,3 @@
-export { CheckoutItem } from "./checkout-item";
+import CheckoutItem from "./checkout-item";
+
+export { CheckoutItem };

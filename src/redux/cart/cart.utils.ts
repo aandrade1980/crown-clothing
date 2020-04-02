@@ -19,3 +19,22 @@ export const addItemToCart = (
 
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (
+  cartItems: IItem[],
+  cartItemToRemove: IItem
+) => {
+  const existingCartItem = cartItems.find(
+    ({ id }) => id === cartItemToRemove.id
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter(({ id }) => id !== cartItemToRemove.id);
+  }
+
+  return cartItems.map(cartItem =>
+    cartItem.id === cartItemToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
