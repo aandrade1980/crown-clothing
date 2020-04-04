@@ -28,7 +28,7 @@ interface IProps extends ConnectedProps {
 
 function App({ setCurrentUser, currentUser }: IProps) {
   React.useEffect(() => {
-    auth.onAuthStateChanged(async userAuth => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth, {});
 
@@ -39,6 +39,7 @@ function App({ setCurrentUser, currentUser }: IProps) {
         });
       } else setCurrentUser(null);
     });
+    return unsubscribeFromAuth();
   }, [setCurrentUser]);
 
   const handleSignOut = () => auth.signOut();

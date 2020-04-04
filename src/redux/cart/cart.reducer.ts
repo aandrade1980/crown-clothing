@@ -5,7 +5,7 @@ import {
   CLEAR_ITEM_FROM_CART,
   CartActionTypes,
   CartState
-} from "./types";
+} from "./cart.types";
 
 import { addItemToCart, removeItemFromCart } from "./cart.utils";
 

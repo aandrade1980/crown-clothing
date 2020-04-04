@@ -4,7 +4,7 @@ import {
   REMOVE_ITEM,
   TOGGLE_CART_HIDDEN,
   CartActionTypes
-} from "./types";
+} from "./cart.types";
 import { IItem } from "../../models/collection";
 
 export function toggleCartHidden(): CartActionTypes {

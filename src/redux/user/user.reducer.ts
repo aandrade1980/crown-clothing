@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, UserActionTypes, UserState } from "./types";
+import { SET_CURRENT_USER, UserActionTypes, UserState } from "./user.types";
 
 const INITIAL_STATE: UserState = {
   currentUser: null

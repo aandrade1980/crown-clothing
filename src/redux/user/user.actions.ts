@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, UserActionTypes } from "./types";
+import { SET_CURRENT_USER, UserActionTypes } from "./user.types";
 
 export function setCurrentUser(user: firebase.User | null): UserActionTypes {
   return {
