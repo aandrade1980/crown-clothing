@@ -10,6 +10,7 @@ import {
 
 // Components
 import { CheckoutItem } from "../../components/checkout-item";
+import { StripeCheckoutButton } from "../../components/stripe-button";
 
 import { IRootState } from "../../redux/types";
 
@@ -47,6 +48,7 @@ const CheckoutPage: React.FC<ConnectedProps> = ({ cartItems, cartTotal }) => (
     <div className="total">
       <span>TOTAL: ${cartTotal}</span>
     </div>
+    <StripeCheckoutButton price={cartTotal} />
   </div>
 );
 
