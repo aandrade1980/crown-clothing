@@ -1,6 +1,7 @@
 import React from "react";
 
-import "./custom-button.scss";
+// Styled
+import { CustomButtonContainer } from "./custom-button.styles";
 
 interface ICustomButton {
   children: React.ReactNode;
@@ -10,17 +11,6 @@ interface ICustomButton {
   inverted?: boolean;
 }
 
-export const CustomButton = ({
-  children,
-  isGoogleSignIn,
-  inverted,
-  ...otherProps
-}: ICustomButton) => (
-  <button
-    className={`custom-button ${inverted && "inverted"} ${isGoogleSignIn &&
-      "google-sign-in"}`}
-    {...otherProps}
-  >
-    {children}
-  </button>
+export const CustomButton = ({ children, ...props }: ICustomButton) => (
+  <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
 );

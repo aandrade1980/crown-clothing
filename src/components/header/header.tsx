@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // Redux
 import { connect } from "react-redux";
@@ -11,11 +10,17 @@ import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { CartIcon } from "../cart-icon";
 import { CartDropdown } from "../cart-dropdown";
 
+// Styled
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink
+} from "./header.styles";
+
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import { IRootState } from "../../redux/types";
-
-import "./header.scss";
 
 interface IHeaderProps {
   currentUser: Partial<firebase.User> | null;
@@ -25,28 +30,24 @@ interface IHeaderProps {
 
 const Header = ({ currentUser, signOut, hidden }: IHeaderProps) => {
   return (
-    <div className="header">
-      <Link to="/" className="logo-container">
-        <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link to="/shop" className="option">
-          SHOP
-        </Link>
-        <Link to="/shop" className="option">
-          CONTACT
-        </Link>
+    <HeaderContainer>
+      <LogoContainer to="/">
+        <Logo />
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink to="/shop">CONTACT</OptionLink>
         {currentUser ? (
-          <div className="option" onClick={signOut}>
+          <OptionLink as="div" onClick={signOut}>
             SIGN OUT
-          </div>
+          </OptionLink>
         ) : (
-          <Link to="/signin">SIGN IN</Link>
+          <OptionLink to="/signin">SIGN IN</OptionLink>
         )}
         <CartIcon />
-      </div>
+      </OptionsContainer>
       {hidden ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
   );
 };
 
