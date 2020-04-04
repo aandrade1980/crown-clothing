@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 interface ICustomButton {
   isGoogleSignIn?: boolean;
   inverted?: boolean;
+  isAddToCart?: boolean;
 }
 
 const buttonStyles = css`
@@ -39,7 +40,19 @@ const googleSignInStyles = css`
   }
 `;
 
+const addToCartStyles = css`
+  width: 80%;
+  opacity: 0.7;
+  position: absolute;
+  top: 255px;
+  display: none;
+`;
+
 const getButtonStyles = (props: ICustomButton) => {
+  if (props.isAddToCart) {
+    return addToCartStyles;
+  }
+
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
   }

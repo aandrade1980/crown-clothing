@@ -22,9 +22,8 @@ import { IRootState } from "./redux/types";
 
 import "./App.css";
 
-interface IProps {
+interface IProps extends ConnectedProps {
   setCurrentUser: (user: firebase.User | null) => void;
-  currentUser: firebase.User | null;
 }
 
 function App({ setCurrentUser, currentUser }: IProps) {

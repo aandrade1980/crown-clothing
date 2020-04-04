@@ -33,6 +33,7 @@ const CollectionItem: React.FC<IItem & IAddItem> = ({
     <CustomButton
       inverted
       onClick={() => addItem({ id, name, price, imageUrl, quantity })}
+      isAddToCart
     >
       {" "}
       Add to Cart{" "}

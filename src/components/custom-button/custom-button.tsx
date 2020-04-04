@@ -9,6 +9,7 @@ interface ICustomButton {
   type?: "button" | "submit" | "reset" | undefined;
   isGoogleSignIn?: boolean;
   inverted?: boolean;
+  isAddToCart?: boolean;
 }
 
 export const CustomButton = ({ children, ...props }: ICustomButton) => (
