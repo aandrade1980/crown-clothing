@@ -5,7 +5,7 @@ export interface IRootState {
   user: ICurrentUser;
   cart: ICart;
   directory: IDirectory;
-  shop: ICollections;
+  shop: IShop;
 }
 
 interface ICurrentUser {
@@ -19,6 +19,12 @@ interface ICart {
 
 interface IDirectory {
   sections: ISection[];
+}
+
+interface IShop {
+  collections: ICollections;
+  isFetching: boolean;
+  errorMessage: string;
 }
 
 export interface ICollections {

@@ -1,14 +1,25 @@
 import { ICollections } from "../types";
 
-export const UPDATE_COLLECTIONS = "UPDATE_COLLECTIONS";
+export const FETCH_COLLECTIONS_START = "FETCH_COLLECTIONS_START";
+export const FETCH_COLLECTIONS_SUCCESS = "FETCH_COLLECTIONS_SUCCESS";
+export const FETCH_COLLECTIONS_FAIL = "FETCH_COLLECTIONS_FAIL";
 
-interface updateCollections {
-  type: typeof UPDATE_COLLECTIONS;
+interface fetchCollectionsStart {
+  type: typeof FETCH_COLLECTIONS_START;
+  payload: boolean;
+}
+
+interface fetchCollectionsSuccess {
+  type: typeof FETCH_COLLECTIONS_SUCCESS;
   payload: ICollections;
 }
 
-export interface ShopState {
-  collections: ICollections;
+interface fetchCollectionsFail {
+  type: typeof FETCH_COLLECTIONS_FAIL;
+  payload: string;
 }
 
-export type ShopActionTypes = updateCollections;
+export type ShopActionTypes =
+  | fetchCollectionsStart
+  | fetchCollectionsSuccess
+  | fetchCollectionsFail;

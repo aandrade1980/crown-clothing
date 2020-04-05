@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 
 // Components
-import { CollectionPreview } from "../collection-preview";
+import { CollectionPreview } from '../collection-preview';
 
-import { ICollections } from "../../redux/types";
+// Types
+import { ICollections } from '../../redux/types';
 
-import "./collections-overview.scss";
+import './collections-overview.scss';
 
 export const CollectionsOverview = ({ collections }: ICollections) => (
   <div className="collections-overview">

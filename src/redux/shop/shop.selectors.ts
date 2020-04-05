@@ -1,6 +1,6 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
-import { IRootState } from "../types";
+import { IRootState } from '../types';
 
 const selectShop = (state: IRootState) => state.shop;
 
@@ -19,3 +19,13 @@ export const selectCollection = (collectionUrlParam: string) =>
   createSelector([selectCollections], collections =>
     collections ? collections[collectionUrlParam] : null
   );
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
+
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.collections
+);

@@ -1,3 +1,5 @@
-import CollectionPage from "./collection";
+import CollectionPage from './collection';
+import { CollectionPageContainer } from './collection.container';
 
 export { CollectionPage };
+export { CollectionPageContainer };
