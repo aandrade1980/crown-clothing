@@ -1,46 +1,41 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Redux
-import { Dispatch } from "redux";
-import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/user.actions";
-import { selectCurrentUser } from "./redux/user/user.selectors";
-import { createStructuredSelector } from "reselect";
+import { connect } from 'react-redux';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 // Components
-import { HomePage } from "./pages/homepage";
-import Shop from "./pages/shop";
-import Header from "./components/header";
-import { SignInSignOutPage } from "./pages/sign-in-sign-out";
-import { CheckoutPage } from "./pages/checkoutpage";
+import { HomePage } from './pages/homepage';
+import Shop from './pages/shop';
+import Header from './components/header';
+import { SignInSignOutPage } from './pages/sign-in-sign-out';
+import { CheckoutPage } from './pages/checkoutpage';
 
 // Firebase
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth } from './firebase/firebase.utils';
 
-import { IRootState } from "./redux/types";
+import { IRootState } from './redux/types';
 
-import "./App.css";
+import './App.css';
 
-interface IProps extends ConnectedProps {
-  setCurrentUser: (user: firebase.User | null) => void;
-}
+interface IProps extends ConnectedProps {}
 
-function App({ setCurrentUser, currentUser }: IProps) {
+function App({ currentUser }: IProps) {
   React.useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth, {});
-
-        userRef?.onSnapshot((snapShot: firebase.firestore.DocumentData) => {
-          setCurrentUser({
-            ...snapShot.data()
-          });
-        });
-      } else setCurrentUser(null);
-    });
-    return unsubscribeFromAuth();
-  }, [setCurrentUser]);
+    // const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth, {});
+    //     userRef?.onSnapshot((snapShot: firebase.firestore.DocumentData) => {
+    //       setCurrentUser({
+    //         ...snapShot.data()
+    //       });
+    //     });
+    //   } else setCurrentUser(null);
+    // });
+    // return unsubscribeFromAuth();
+  }, []);
 
   const handleSignOut = () => auth.signOut();
 
@@ -71,8 +66,4 @@ const mapStateToProps = createStructuredSelector<IRootState, ConnectedProps>({
   currentUser: selectCurrentUser
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCurrentUser: (user: firebase.User | null) => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
