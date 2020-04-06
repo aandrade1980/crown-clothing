@@ -2,7 +2,9 @@ import {
   UserActionTypes,
   UserState,
   SIGN_IN_SUCCESS,
-  SIGN_IN_FAILURE
+  SIGN_IN_FAILURE,
+  SIGN_OUT_FAILURE,
+  SIGN_OUT_SUCCESS
 } from './user.types';
 
 const INITIAL_STATE: UserState = {
@@ -21,7 +23,14 @@ export default function userReducer(
         currentUser: action.payload,
         errorMessage: undefined
       };
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+        errorMessage: undefined
+      };
     case SIGN_IN_FAILURE:
+    case SIGN_OUT_FAILURE:
       return {
         ...state,
         errorMessage: action.payload
