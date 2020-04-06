@@ -16,7 +16,7 @@ import { CheckoutPage } from './pages/checkoutpage';
 // Firebase
 import { auth } from './firebase/firebase.utils';
 
-import { IRootState } from './redux/types';
+import { IRootState, ICurrentUser } from './redux/types';
 
 import './App.css';
 
@@ -59,7 +59,7 @@ function App({ currentUser }: IProps) {
 }
 
 interface ConnectedProps {
-  currentUser: firebase.User;
+  currentUser: ICurrentUser;
 }
 
 const mapStateToProps = createStructuredSelector<IRootState, ConnectedProps>({

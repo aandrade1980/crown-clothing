@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 // Redux
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
 
 // Component
-import { CartIcon } from "../cart-icon";
-import { CartDropdown } from "../cart-dropdown";
+import { CartIcon } from '../cart-icon';
+import { CartDropdown } from '../cart-dropdown';
 
 // Styled
 import {
@@ -16,14 +16,14 @@ import {
   LogoContainer,
   OptionsContainer,
   OptionLink
-} from "./header.styles";
+} from './header.styles';
 
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-import { IRootState } from "../../redux/types";
+import { IRootState, ICurrentUser } from '../../redux/types';
 
 interface IHeaderProps {
-  currentUser: Partial<firebase.User> | null;
+  currentUser: ICurrentUser;
   signOut: () => void;
   hidden: boolean;
 }
@@ -52,7 +52,7 @@ const Header = ({ currentUser, signOut, hidden }: IHeaderProps) => {
 };
 
 interface ConnectedProps {
-  currentUser: firebase.User;
+  currentUser: ICurrentUser;
   hidden: boolean;
 }
 
