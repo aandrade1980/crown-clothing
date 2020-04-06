@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react';
 
 // Redux
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { signOutStart } from '../../redux/user/user.actions';
 
 // Component
-import { CartIcon } from "../cart-icon";
-import { CartDropdown } from "../cart-dropdown";
+import { CartIcon } from '../cart-icon';
+import { CartDropdown } from '../cart-dropdown';
 
 // Styled
 import {
@@ -16,19 +18,19 @@ import {
   LogoContainer,
   OptionsContainer,
   OptionLink
-} from "./header.styles";
+} from './header.styles';
 
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-import { IRootState } from "../../redux/types";
+import { IRootState, ICurrentUser } from '../../redux/types';
 
 interface IHeaderProps {
-  currentUser: Partial<firebase.User> | null;
-  signOut: () => void;
+  currentUser: ICurrentUser;
+  signOutStart: () => void;
   hidden: boolean;
 }
 
-const Header = ({ currentUser, signOut, hidden }: IHeaderProps) => {
+const Header = ({ currentUser, signOutStart, hidden }: IHeaderProps) => {
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -38,7 +40,7 @@ const Header = ({ currentUser, signOut, hidden }: IHeaderProps) => {
         <OptionLink to="/shop">SHOP</OptionLink>
         <OptionLink to="/shop">CONTACT</OptionLink>
         {currentUser ? (
-          <OptionLink as="div" onClick={signOut}>
+          <OptionLink as="div" onClick={signOutStart}>
             SIGN OUT
           </OptionLink>
         ) : (
@@ -52,7 +54,7 @@ const Header = ({ currentUser, signOut, hidden }: IHeaderProps) => {
 };
 
 interface ConnectedProps {
-  currentUser: firebase.User;
+  currentUser: ICurrentUser;
   hidden: boolean;
 }
 
@@ -61,4 +63,8 @@ const mapStateToProps = createStructuredSelector<IRootState, ConnectedProps>({
   hidden: selectCartHidden
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

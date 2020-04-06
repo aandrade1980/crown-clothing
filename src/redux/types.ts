@@ -1,14 +1,19 @@
-import { IItem, ICollection } from "../models/collection";
-import { ISection } from "../models/section";
+import { IItem, ICollection } from '../models/collection';
+import { ISection } from '../models/section';
 
 export interface IRootState {
-  user: ICurrentUser;
+  user: IUser;
   cart: ICart;
   directory: IDirectory;
   shop: IShop;
 }
 
-interface ICurrentUser {
+interface IUser {
+  currentUser: ICurrentUser;
+  errorMessage: string;
+}
+
+export interface ICurrentUser {
   currentUser: firebase.User | null;
 }
 
