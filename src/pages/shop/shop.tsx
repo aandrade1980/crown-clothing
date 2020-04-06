@@ -3,7 +3,7 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 
 // Redux
 import { connect } from 'react-redux';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
@@ -12,13 +12,13 @@ import { CollectionOverviewContainer } from '../../components/collections-overvi
 import { CollectionPageContainer } from '../collection';
 
 interface IShopPage extends RouteComponentProps {
-  fetchCollectionStartAsync: () => void;
+  fetchCollectionsStart: () => void;
 }
 
-export function ShopPage({ match, fetchCollectionStartAsync }: IShopPage) {
+export function ShopPage({ match, fetchCollectionsStart }: IShopPage) {
   React.useEffect(() => {
-    fetchCollectionStartAsync();
-  }, [fetchCollectionStartAsync]);
+    fetchCollectionsStart();
+  }, [fetchCollectionsStart]);
   return (
     <div className="shop-page">
       <Route
@@ -35,7 +35,7 @@ export function ShopPage({ match, fetchCollectionStartAsync }: IShopPage) {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-  fetchCollectionStartAsync: () => dispatch(fetchCollectionsStartAsync())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);
