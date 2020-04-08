@@ -1,22 +1,30 @@
-import React from "react";
+import React from 'react';
 
-// Firebase
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+// Redux
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { signUpStart } from '../../redux/user/user.actions';
 
 // Components
-import { FormInput } from "../form-input";
-import { CustomButton } from "../custom-button";
+import { FormInput } from '../form-input';
+import { CustomButton } from '../custom-button';
 
-import "./sign-up.scss";
+import { IUSer } from '../../models/user';
+
+import './sign-up.scss';
 
 const initialUserState = {
-  displayName: "",
-  email: "",
-  password: "",
-  confirmPassword: ""
+  displayName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
 };
 
-export default function SignUp() {
+interface ISignUp {
+  signUpStart: (userCredentials: IUSer) => void;
+}
+
+function SignUp({ signUpStart }: ISignUp) {
   const [user, setUser] = React.useState(initialUserState);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,18 +36,7 @@ export default function SignUp() {
       alert("Password don't match");
       return;
     }
-
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-
-      setUser(initialUserState);
-    } catch (error) {
-      console.error("Error on handleSubmmit on sign-up: ", error.message);
-    }
+    signUpStart({ displayName, email, password });
   };
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -90,3 +87,10 @@ export default function SignUp() {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  signUpStart: (userCredentials: IUSer) =>
+    dispatch(signUpStart(userCredentials))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

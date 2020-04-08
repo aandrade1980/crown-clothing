@@ -8,6 +8,9 @@ export const CHECK_USER_SESSION = 'CHECK_USER_SESSION';
 export const SIGN_OUT_START = 'SIGN_OUT_START';
 export const SIGN_OUT_SUCCESS = 'SIGN_OUT_SUCCESS';
 export const SIGN_OUT_FAILURE = 'SIGN_OUT_FAILURE';
+export const SIGN_UP_START = 'SIGN_UP_START';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
 interface SingOutStart {
   type: typeof SIGN_OUT_START;
@@ -41,6 +44,11 @@ interface EmailSignInStart {
   payload: IUSer;
 }
 
+interface SingUpFailure {
+  type: typeof SIGN_UP_FAILURE;
+  payload: string;
+}
+
 export type UserActionTypes =
   | GoogleSignInStart
   | EmailSignInStart
@@ -48,7 +56,8 @@ export type UserActionTypes =
   | SignInFailure
   | SingOutStart
   | SingOutSuccess
-  | SingOutFailure;
+  | SingOutFailure
+  | SingUpFailure;
 
 export interface UserState {
   currentUser: firebase.User | null;

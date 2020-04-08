@@ -3,9 +3,10 @@ import {
   CLEAR_ITEM_FROM_CART,
   REMOVE_ITEM,
   TOGGLE_CART_HIDDEN,
-  CartActionTypes
-} from "./cart.types";
-import { IItem } from "../../models/collection";
+  CartActionTypes,
+  CLEAR_CART
+} from './cart.types';
+import { IItem } from '../../models/collection';
 
 export function toggleCartHidden(): CartActionTypes {
   return {
@@ -31,5 +32,11 @@ export function removeItem(item: IItem): CartActionTypes {
   return {
     type: REMOVE_ITEM,
     payload: item
+  };
+}
+
+export function clearCart(): CartActionTypes {
+  return {
+    type: CLEAR_CART
   };
 }
