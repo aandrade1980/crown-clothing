@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // Components
-import Directory from "../../components/directory/directory";
+import Directory from '../../components/directory/directory';
 
 // Styled
-import { HomePageContainer } from "./homepage.styles";
+import { HomePageContainer } from './homepage.styles';
 
 export const HomePage = () => {
   return (

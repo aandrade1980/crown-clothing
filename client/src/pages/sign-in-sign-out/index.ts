@@ -1,1 +1,3 @@
-export { SignInSignOutPage } from "./sign-in-sign-out";
+import { SignInSignOutPage } from './sign-in-sign-out';
+
+export default SignInSignOutPage;

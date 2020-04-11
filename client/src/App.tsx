@@ -9,15 +9,16 @@ import { createStructuredSelector } from 'reselect';
 import { checkUserSession } from './redux/user/user.actions';
 
 // Components
-import { HomePage } from './pages/homepage';
-import Shop from './pages/shop';
 import Header from './components/header';
-import { SignInSignOutPage } from './pages/sign-in-sign-out';
-import { CheckoutPage } from './pages/checkoutpage';
 
 import { IRootState, ICurrentUser } from './redux/types';
 
 import { GlobalStyle } from './global.styles';
+
+const HomePage = React.lazy(() => import('./pages/homepage'));
+const ShopPage = React.lazy(() => import('./pages/shop'));
+const CheckoutPage = React.lazy(() => import('./pages/checkoutpage'));
+const SignInSignOutPage = React.lazy(() => import('./pages/sign-in-sign-out'));
 
 interface IProps extends ConnectedProps {
   checkUserSession: () => void;
@@ -33,16 +34,18 @@ function App({ currentUser, checkUserSession }: IProps) {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={Shop} />
-        <Route exact path="/checkout" component={CheckoutPage} />
-        <Route
-          exact
-          path="/signin"
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInSignOutPage />
-          }
-        />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInSignOutPage />
+            }
+          />
+        </React.Suspense>
       </Switch>
     </div>
   );

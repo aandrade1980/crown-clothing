@@ -15,7 +15,7 @@ interface IShopPage extends RouteComponentProps {
   fetchCollectionsStart: () => void;
 }
 
-export function ShopPage({ match, fetchCollectionsStart }: IShopPage) {
+function ShopPage({ match, fetchCollectionsStart }: IShopPage) {
   React.useEffect(() => {
     fetchCollectionsStart();
   }, [fetchCollectionsStart]);
