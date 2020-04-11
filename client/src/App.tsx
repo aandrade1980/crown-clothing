@@ -10,6 +10,7 @@ import { checkUserSession } from './redux/user/user.actions';
 
 // Components
 import Header from './components/header';
+import ErrorBoundary from './components/error-boundary/error-boundary';
 
 import { IRootState, ICurrentUser } from './redux/types';
 
@@ -34,18 +35,21 @@ function App({ currentUser, checkUserSession }: IProps) {
       <GlobalStyle />
       <Header />
       <Switch>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <SignInSignOutPage />
-            }
-          />
-        </React.Suspense>
+        <ErrorBoundary>
+          {/* TODO: add a spinner component for the suspense fallback */}
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route exact path="/checkout" component={CheckoutPage} />
+            <Route
+              exact
+              path="/signin"
+              render={() =>
+                currentUser ? <Redirect to="/" /> : <SignInSignOutPage />
+              }
+            />
+          </React.Suspense>
+        </ErrorBoundary>
       </Switch>
     </div>
   );

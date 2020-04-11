@@ -9,7 +9,7 @@ import { compose } from 'redux';
 
 // Components
 import { WithSpinner } from '../with-spinner';
-import { CollectionsOverview } from './collections-overview';
+import CollectionsOverview from './collections-overview';
 
 import { IRootState } from '../../redux/types';
 import { ICollection } from '../../models/collection';

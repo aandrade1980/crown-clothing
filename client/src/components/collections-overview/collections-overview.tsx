@@ -8,7 +8,7 @@ import { ICollections } from '../../redux/types';
 
 import './collections-overview.scss';
 
-export const CollectionsOverview = ({ collections }: ICollections) => (
+const CollectionsOverview = ({ collections }: ICollections) => (
   <div className="collections-overview">
     {collections.map(({ id, ...otherCollectionProps }) => (
       <CollectionPreview key={id} id={id} {...otherCollectionProps} />

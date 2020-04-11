@@ -8,8 +8,11 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
 // Components
-import { CollectionOverviewContainer } from '../../components/collections-overview';
 import { CollectionPageContainer } from '../collection';
+
+const CollectionOverviewContainer = React.lazy(() =>
+  import('../../components/collections-overview')
+);
 
 interface IShopPage extends RouteComponentProps {
   fetchCollectionsStart: () => void;
@@ -21,15 +24,17 @@ function ShopPage({ match, fetchCollectionsStart }: IShopPage) {
   }, [fetchCollectionsStart]);
   return (
     <div className="shop-page">
-      <Route
-        exact
-        path={`${match.path}`}
-        component={CollectionOverviewContainer}
-      />
-      <Route
-        path={`${match.path}/:collectionId`}
-        component={CollectionPageContainer}
-      />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Route
+          exact
+          path={`${match.path}`}
+          component={CollectionOverviewContainer}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          component={CollectionPageContainer}
+        />
+      </React.Suspense>
     </div>
   );
 }
