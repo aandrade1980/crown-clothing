@@ -17,7 +17,7 @@ import { CheckoutPage } from './pages/checkoutpage';
 
 import { IRootState, ICurrentUser } from './redux/types';
 
-import './App.css';
+import { GlobalStyle } from './global.styles';
 
 interface IProps extends ConnectedProps {
   checkUserSession: () => void;
@@ -30,6 +30,7 @@ function App({ currentUser, checkUserSession }: IProps) {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
