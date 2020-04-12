@@ -9,7 +9,18 @@ import { HomePageContainer } from './homepage.styles';
 export const HomePage = () => {
   return (
     <HomePageContainer>
-      <Directory />
+      <React.Profiler
+        id="Directory"
+        onRender={(id, phase, actualDuration) => {
+          console.log({
+            id,
+            phase,
+            actualDuration
+          });
+        }}
+      >
+        <Directory />
+      </React.Profiler>
     </HomePageContainer>
   );
 };
