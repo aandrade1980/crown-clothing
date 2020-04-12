@@ -1,21 +1,21 @@
-import React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 // Redux
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { selectCartItems } from "../../redux/cart/cart.selectors";
-import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { selectCartItems } from '../../redux/cart/cart.selectors';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 // Component
-import { CustomButton } from "../custom-button";
-import { CartItem } from "../cart-item";
+import { CustomButton } from '../custom-button';
+import CartItem from '../cart-item';
 
 // Types
-import { IRootState } from "../../redux/types";
-import { IItem } from "../../models/collection";
+import { IRootState } from '../../redux/types';
+import { IItem } from '../../models/collection';
 
-import "./cart-dropdown.scss";
+import './cart-dropdown.scss';
 
 interface ICartDropdownProps extends RouteComponentProps {
   cartItems: IItem[];
@@ -33,7 +33,7 @@ const CartDropdown = ({ cartItems, history, dispatch }: ICartDropdownProps) => (
     </div>
     <CustomButton
       onClick={() => {
-        history.push("/checkout");
+        history.push('/checkout');
         dispatch(toggleCartHidden());
       }}
     >

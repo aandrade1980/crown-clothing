@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { IItem } from "../../models/collection";
+import { IItem } from '../../models/collection';
 
-import "./cart-item.scss";
+import './cart-item.scss';
 
-export const CartItem = ({ imageUrl, price, name, quantity }: IItem) => (
+const CartItem = ({ imageUrl, price, name, quantity }: IItem) => (
   <div className="cart-item">
     <img src={imageUrl} alt="item" />
     <div className="item-deta">
@@ -15,3 +15,5 @@ export const CartItem = ({ imageUrl, price, name, quantity }: IItem) => (
     </div>
   </div>
 );
+
+export default React.memo(CartItem);
