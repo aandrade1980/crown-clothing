@@ -16,7 +16,7 @@
     "@types/redux-logger": "^3.0.7",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^5.0.1",
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "firebase": "^7.13.0",
     "node-sass": "^7.0.0",
     "react": "^16.13.1",
